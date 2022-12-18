@@ -1,0 +1,17 @@
+<p-table [value]="jobRuns">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Job ID</th>
+            <th>Job Name</th>
+            <th>Job Execute ID</th>
+            <th>Status</th>
+            <th>Create Time</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-job>
+        <tr>
+         <td>{{job.id}}</td>
+         <td>{{job.name}}</td>
+        </tr>
+    </ng-template>
+</p-table>
