@@ -1,11 +1,11 @@
 
-<p-dialog header="Title" [(visible)]="isShowDialog">
+<p-dialog header="Title" [(visible)]="isShowDialog" (onHide)="handleHide()">
     <div *ngIf="loading;else hasContent">
         <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
     </div>
     <ng-template #hasContent>
-        <div >
-            Content
+        <div>
+            {{detailId}}
         </div>
     </ng-template>
    

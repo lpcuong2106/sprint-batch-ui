@@ -27,4 +27,8 @@ export class HistoryRunComponent implements OnInit {
     this.showDetailJob = true;
   }
 
+  onHideDialog(i: Boolean){
+    this.showDetailJob = false;
+  }
+
 }

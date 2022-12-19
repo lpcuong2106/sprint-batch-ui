@@ -26,5 +26,5 @@
         </tr>
     </ng-template>
 </p-table>
-<app-job-detail [detailId]="detailId" [isShowDialog]="showDetailJob"></app-job-detail>
+<app-job-detail [detailId]="detailId" [isShowDialog]="showDetailJob" (close)="onHideDialog($event)"></app-job-detail>
 </div>
