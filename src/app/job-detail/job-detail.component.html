@@ -1,6 +1,15 @@
 
-<p-dialog header="Title" [(visible)]="display">
-    Content
+<p-dialog header="Title" [(visible)]="isShowDialog">
+    <div *ngIf="loading;else hasContent">
+        <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+    </div>
+    <ng-template #hasContent>
+        <div >
+            Content
+        </div>
+    </ng-template>
+   
+    
 </p-dialog>
 
-<button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show"></button>
+<!-- <button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show"></button> -->

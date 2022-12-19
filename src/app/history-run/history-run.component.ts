@@ -10,21 +10,21 @@ import { HistoryRun } from './history';
 export class HistoryRunComponent implements OnInit {
   jobRuns: HistoryRun[] = [];
   loading: boolean = false;
+  showDetailJob: boolean = false;
+  detailId: String = "";
 
   constructor(private jobService: JobService) {}
   ngOnInit(): void {
     this.loading = true;
-    this.jobRuns = [{ id: '1' }, { id: '2' }];
     this.jobService.getAllHistory().then((data) => {
       this.jobRuns = data;
       this.loading = false;
     });
   }
 
-  // onI() {
-  //   this.cars = [
-  //     {id:"1"},
-  //     {id:"2"},
-  //   ]
-  // }
+  handleShowDetail(num: String){
+    this.detailId = num;
+    this.showDetailJob = true;
+  }
+
 }
