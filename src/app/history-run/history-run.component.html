@@ -4,27 +4,24 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Job Name</th>
-            <th>Instance</th>
-            <th>Execute ID</th>
-            <th>Status</th>
+            <th>Instance ID</th>
             <th>Start Date</th>
             <th>Duration</th>
+            <th>Status</th>
             <th>Files</th>
-            <th>Detail</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-job>
         <tr>
-         <td>{{job.name}}</td>
-         <td>{{job.id}}</td>
-         <td>{{job.name}}</td>
-         <td>{{job.name}}</td>
-         <td>{{job.name}}</td>
-         <td>{{job.name}}</td>
-         <td><i class="pi pi-file" style="font-size: 2rem"></i></td>
-         <td><i class="pi pi-folder" style="font-size: 2rem" (click)="handleShowDetail(job.id)"></i></td>
+         <td>{{job.jobName}}</td>
+         <td>{{job.jobInstanceId}}</td>
+        
+         <td>{{formatDate(job.startTime)}}</td>
+         <td>{{distanceDate(job.endTime, job.startTime)}}</td>
+         <td>{{job.status}}</td>
+         <td><a (click)="downloadFile(job.reportFile)"><i class="pi pi-file" style="font-size: 2rem"></i></a></td>
         </tr>
     </ng-template>
 </p-table>
-<app-job-detail [detailId]="detailId" [isShowDialog]="showDetailJob" (close)="onHideDialog($event)"></app-job-detail>
+<!-- <app-job-detail [detailId]="detailId" [isShowDialog]="showDetailJob" (close)="onHideDialog($event)"></app-job-detail> -->
 </div>

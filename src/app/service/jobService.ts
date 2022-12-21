@@ -4,22 +4,14 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class JobService {
-  constructor(private http: HttpClient) {}
+  SERVER: String = "https://93bc909e-0c6e-461f-8b54-bdc7df815f35.mock.pstmn.io";
 
-  // getCarsSmall() {
-  //   return this.http
-  //     .get('/showcase/resources/data/cars-small.json')
-  //     .toPromise()
-  //     .then((res) => <Car[]>res.data)
-  //     .then((data) => {
-  //       return data;
-  //     });
-  // }
+  constructor(private http: HttpClient) {}  
 
   getAllHistory() {
     return this.http
       .get(
-        'https://c4e4a39b-840c-4db2-a588-acb7fe5e0aa9.mock.pstmn.io/job-history'
+        this.SERVER + '/api/jobInfo'
       )
       .toPromise()
       .then((res) => <HistoryRun[]>res);
