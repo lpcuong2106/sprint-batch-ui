@@ -16,4 +16,11 @@ export class JobService {
       .toPromise()
       .then((res) => <HistoryRun[]>res);
   }
+
+  runJob(jobName: String){
+    return this.http
+    .post(
+      this.SERVER + '/api/startJob?jobName='+jobName, {}
+    )
+  }
 }

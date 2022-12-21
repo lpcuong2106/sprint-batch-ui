@@ -9,6 +9,8 @@ import { TableModule } from 'primeng/table';
 import { AppComponent } from './app.component';
 import { HistoryRunComponent } from './history-run/history-run.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
+import {ButtonModule} from 'primeng/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, HistoryRunComponent, JobDetailComponent],
@@ -18,6 +20,9 @@ import { JobDetailComponent } from './job-detail/job-detail.component';
     TableModule,
     DialogModule,
     HttpClientModule,
+    ButtonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [JobService],
   bootstrap: [AppComponent],

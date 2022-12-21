@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HistoryRun } from './history';
 import { formatDistance, format } from 'date-fns';
 import { saveAs } from 'file-saver';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-history-run',
@@ -14,6 +15,7 @@ export class HistoryRunComponent implements OnInit {
   loading: boolean = false;
   showDetailJob: boolean = false;
   detailId: String = '';
+  runJobForm!: FormGroup;
 
   constructor(private jobService: JobService) {}
   ngOnInit(): void {
@@ -22,19 +24,10 @@ export class HistoryRunComponent implements OnInit {
       this.jobRuns = data;
       this.loading = false;
     });
+    this.runJobForm = new FormGroup({
+      jobName: new FormControl('', Validators.required),
+    });
   }
-
-  // downloadFile(dataURI: string){
-  //     const byteString = window.atob(dataURI);
-  //     const arrayBuffer = new ArrayBuffer(byteString.length);
-  //     const int8Array = new Uint8Array(arrayBuffer);
-  //     for (let i = 0; i < byteString.length; i++) {
-  //       int8Array[i] = byteString.charCodeAt(i);
-  //     }
-  //     const blob = new Blob([int8Array], { type: 'image/png' });
-  //     return blob;
-
-  // }
 
   downloadFile(dataUrl: string) {
     // Split into two parts
@@ -64,5 +57,18 @@ export class HistoryRunComponent implements OnInit {
 
   formatDate(startTime: Date) {
     return format(new Date(startTime), 'MM/dd/yyyy');
+  }
+
+  handleTriggerJob(data: any) {
+    console.log('click here', data);
+    this.loading = true;
+    this.jobService.runJob(data.jobName).subscribe((data: any) => {
+      // this.loading = false;
+      this.runJobForm.reset();
+      this.jobService.getAllHistory().then((data) => {
+        this.jobRuns = data;
+        this.loading = false;
+      });
+    });
   }
 }

@@ -1,27 +1,45 @@
 <div>
+    <div class="grid p-fluid">
+        <form [formGroup]="runJobForm" (ngSubmit)="handleTriggerJob(runJobForm.value)" >
+            <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                  <input type="text" required formControlName="jobName" name="jobName" pInputText placeholder="Job Name" />
+                  <p-button (click)="handleTriggerJob(runJobForm.value)">Run</p-button>
+                </div>
+              </div>
+          
+        </form>
+    
+    </div>
   <h3>Last job executions</h3>
+  
+
   <p-table [value]="jobRuns" [loading]="loading" [paginator]="true" [rows]="4">
     <ng-template pTemplate="header">
-        <tr>
-            <th>Job Name</th>
-            <th>Instance ID</th>
-            <th>Start Date</th>
-            <th>Duration</th>
-            <th>Status</th>
-            <th>Files</th>
-        </tr>
+      <tr>
+        <th>Job Name</th>
+        <th>Instance ID</th>
+        <th>Start Date</th>
+        <th>Duration</th>
+        <th>Status</th>
+        <th>Files</th>
+      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-job>
-        <tr>
-         <td>{{job.jobName}}</td>
-         <td>{{job.jobInstanceId}}</td>
-        
-         <td>{{formatDate(job.startTime)}}</td>
-         <td>{{distanceDate(job.endTime, job.startTime)}}</td>
-         <td>{{job.status}}</td>
-         <td><a (click)="downloadFile(job.reportFile)"><i class="pi pi-file" style="font-size: 2rem"></i></a></td>
-        </tr>
+      <tr>
+        <td>{{ job.jobName }}</td>
+        <td>{{ job.jobInstanceId }}</td>
+
+        <td>{{ formatDate(job.startTime) }}</td>
+        <td>{{ distanceDate(job.endTime, job.startTime) }}</td>
+        <td>{{ job.status }}</td>
+        <td>
+          <a (click)="downloadFile(job.reportFile)"
+            ><i class="pi pi-file" style="font-size: 2rem"></i
+          ></a>
+        </td>
+      </tr>
     </ng-template>
-</p-table>
-<!-- <app-job-detail [detailId]="detailId" [isShowDialog]="showDetailJob" (close)="onHideDialog($event)"></app-job-detail> -->
+  </p-table>
+  <!-- <app-job-detail [detailId]="detailId" [isShowDialog]="showDetailJob" (close)="onHideDialog($event)"></app-job-detail> -->
 </div>
