@@ -34,7 +34,7 @@
         <td>{{ distanceDate(job.endTime, job.startTime) }}</td>
         <td>{{ job.status }}</td>
         <td>
-          <a (click)="downloadFile(job.reportFile)"
+          <a target="_blank" href="{{dirRootProject}}/files/output/report{{job.jobInstanceId}}.csv"
             ><i class="pi pi-file" style="font-size: 2rem"></i
           ></a>
         </td>

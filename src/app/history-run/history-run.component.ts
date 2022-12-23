@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./history-run.component.css'],
 })
 export class HistoryRunComponent implements OnInit {
+  dirRootProject="file:///D:/KiemDiemDangVien2022"
   jobRuns: HistoryRun[] = [];
   loading: boolean = false;
   showDetailJob: boolean = false;
