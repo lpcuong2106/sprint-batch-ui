@@ -1,28 +1,6 @@
 <div>
   <div class="grid p-fluid">
-    <div [style]="{ display: 'flex', justifyContent: 'space-between' }">
-      <form
-        [formGroup]="runJobForm"
-        (ngSubmit)="handleTriggerJob(runJobForm.value)"
-      >
-        <div class="col-12 md:col-4">
-          <div class="p-inputgroup">
-            <input
-              type="text"
-              required
-              formControlName="jobName"
-              name="jobName"
-              pInputText
-              placeholder="Job Name"
-            />
-            <p-button
-              (click)="handleTriggerJob(runJobForm.value)"
-              [style]="{ marginLeft: '10px' }"
-              >Run</p-button
-            >
-          </div>
-        </div>
-      </form>
+    <div [style]="{ display: 'flex', justifyContent: 'end' }">
       <div>
         <button
           pButton
