@@ -1,9 +1,9 @@
 import { JobService } from './../service/jobService';
 import { Component, OnInit } from '@angular/core';
 import { HistoryRun } from './history';
-import { formatDistance, format } from 'date-fns';
-import { saveAs } from 'file-saver';
+import { formatDistanceStrict, format } from 'date-fns';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-history-run',
@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./history-run.component.css'],
 })
 export class HistoryRunComponent implements OnInit {
-  dirRootProject="file:///D:/KiemDiemDangVien2022"
+  dirRootProject = environment.dirRootProject;
   jobRuns: HistoryRun[] = [];
   loading: boolean = false;
   showDetailJob: boolean = false;
@@ -30,46 +30,38 @@ export class HistoryRunComponent implements OnInit {
     });
   }
 
-  downloadFile(dataUrl: string) {
-    // Split into two parts
-    const parts = dataUrl.split(';base64,');
-
-    // Hold the content type
-    const imageType = parts[0].split(':')[1];
-
-    // Decode Base64 string
-    const decodedData = window.atob(parts[1]);
-
-    // Create UNIT8ARRAY of size same as row data length
-    const uInt8Array = new Uint8Array(decodedData.length);
-
-    // Insert all character code into uInt8Array
-    for (let i = 0; i < decodedData.length; ++i) {
-      uInt8Array[i] = decodedData.charCodeAt(i);
-    }
-
-    const blob = new Blob([uInt8Array], { type: imageType });
-    return saveAs(blob);
+  handleReload() {
+    this.loading = true;
+    this.jobService.getAllHistory().then((data) => {
+      this.jobRuns = data;
+      this.loading = false;
+    });
   }
 
   distanceDate(start: Date, end: Date) {
-    return formatDistance(new Date(end), new Date(start), { addSuffix: true });
+    return formatDistanceStrict(new Date(end), new Date(start));
   }
 
   formatDate(startTime: Date) {
-    return format(new Date(startTime), 'MM/dd/yyyy');
+    return format(new Date(startTime), 'dd/MM/yyyy HH:mm');
   }
 
   handleTriggerJob(data: any) {
-    console.log('click here', data);
     this.loading = true;
-    this.jobService.runJob(data.jobName).subscribe((data: any) => {
-      // this.loading = false;
-      this.runJobForm.reset();
-      this.jobService.getAllHistory().then((data) => {
-        this.jobRuns = data;
+    this.jobService.runJob(data.jobName).subscribe(
+      () => {
+        this.runJobForm.reset();
+        this.jobService.getAllHistory().then((data) => {
+          this.jobRuns = data;
+        });
+      },
+      (e) => {
+        console.log(e);
+        alert('Has a problem when trigger job');
+      },
+      () => {
         this.loading = false;
-      });
-    });
+      }
+    );
   }
 }

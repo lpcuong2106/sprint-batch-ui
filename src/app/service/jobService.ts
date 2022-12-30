@@ -1,26 +1,23 @@
 import { HistoryRun } from './../history-run/history';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environment/environment';
 
 @Injectable()
 export class JobService {
-  SERVER: String = "https://93bc909e-0c6e-461f-8b54-bdc7df815f35.mock.pstmn.io";
-
-  constructor(private http: HttpClient) {}  
+  constructor(private http: HttpClient) {}
 
   getAllHistory() {
     return this.http
-      .get(
-        this.SERVER + '/api/jobInfo'
-      )
+      .get(environment.appUrl + '/api/jobInfo')
       .toPromise()
       .then((res) => <HistoryRun[]>res);
   }
 
-  runJob(jobName: String){
-    return this.http
-    .post(
-      this.SERVER + '/api/startJob?jobName='+jobName, {}
-    )
+  runJob(jobName: String) {
+    return this.http.post(
+      environment.appUrl + '/api/startJob?jobName=' + jobName,
+      {}
+    );
   }
 }

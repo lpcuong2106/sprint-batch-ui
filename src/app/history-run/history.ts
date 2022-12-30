@@ -1,9 +1,7 @@
-export interface HistoryRun{
-    jobName: String;
-    jobInstanceId: Number;
-    createTime: Date;
-    startTime: Date;
-    endTime: Date;
-    status: String;
-    reportFile: String;
+export interface HistoryRun {
+  jobName: String;
+  jobInstanceId: Number;
+  startTime: Date;
+  endTime: Date;
+  status: String;
 }
