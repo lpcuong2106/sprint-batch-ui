@@ -36,18 +36,15 @@
         </td>
         <td *ngIf="job.status == 'STARTED'">Running</td>
         <td>{{ job.status }}</td>
-        <td *ngIf="job.status == 'SUCCESS'">
+        <td *ngIf="job.status == 'COMPLETED'">
           <a
             target="_blank"
-            href="{{ dirRootProject }}/files/output/report{{
-              job.jobInstanceId
-            }}.csv"
+            href="{{ dirRootProject }}/files/output/report{{ job.runId }}.csv"
             ><i class="pi pi-file" style="font-size: 2rem"></i
           ></a>
         </td>
-        <td *ngIf="job.status != 'SUCCESS'"></td>
+        <td *ngIf="job.status != 'COMPLETED'"></td>
       </tr>
     </ng-template>
   </p-table>
-  <!-- <app-job-detail [detailId]="detailId" [isShowDialog]="showDetailJob" (close)="onHideDialog($event)"></app-job-detail> -->
 </div>

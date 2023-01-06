@@ -4,4 +4,5 @@ export interface HistoryRun {
   startTime: Date;
   endTime: Date;
   status: String;
+  runId: String;
 }
